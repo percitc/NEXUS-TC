@@ -1,323 +1,121 @@
-<!DOCTYPE html>
-<html lang="es-PE">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXUS-TC — El núcleo estratégico para tu gestión contable SUNAT</title>
-<meta name="description" content="NEXUS-TC centraliza la gestión de comprobantes, SIRE, Buzón Electrónico y reportes tributarios de SUNAT en una sola app de escritorio, con IA contable integrada.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="estilos.css">
-</head>
-<body>
+// NEXUS-TC — Landing page script
+document.addEventListener("DOMContentLoaded", () => {
 
-<!-- BOTÓN FLOTANTE WHATSAPP -->
-<a href="#" id="wa-float" class="wa-float" aria-label="Contactar por WhatsApp" target="_blank" rel="noopener noreferrer">
-  <div class="wa-float-ring"></div>
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 6.3A8.9 8.9 0 0 0 12.04 3.5 8.95 8.95 0 0 0 3.1 12.4c0 1.6.4 3 1.2 4.3L3.5 21l4.4-1.2a8.9 8.9 0 0 0 4.1 1 9 9 0 0 0 5.6-15.5Zm-5.56 13.8a7.4 7.4 0 0 1-3.8-1l-.27-.16-2.5.7.66-2.4-.18-.28a7.5 7.5 0 0 1-1.1-3.9A7.4 7.4 0 0 1 12 5a7.4 7.4 0 0 1 7.4 7.4 7.4 7.4 0 0 1-7.36 7.4Z"/></svg>
-  <span class="wa-float-tooltip">¡Escríbenos!</span>
-</a>
+  /* Año dinámico */
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-<!-- HEADER -->
-<header class="site-header" id="top">
-  <div class="container header-inner">
-    <a href="#top" class="logo" aria-label="NEXUS-TC inicio">
-      <img src="nexus-tc-logo.png" alt="NEXUS-TC" class="logo-img">
-    </a>
-    <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-      <a href="#problema">El problema</a>
-      <a href="#funcionalidades">Funcionalidades</a>
-      <a href="#asistente-ia">Asistente IA</a>
-      <a href="#planes">Planes</a>
-      <a href="#seguridad">Seguridad</a>
-      <a href="#creador">Creador</a>
-    </nav>
-    <div class="header-cta">
-      <a href="#contacto" class="btn btn-ghost">Contactar</a>
-      <a href="#contacto" class="btn btn-primary">Solicitar demo</a>
-    </div>
-    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
+  /* WhatsApp centralizado */
+  const WA_NUMBER = "51900448916";
+  const WA_MSG_DEFAULT = "Hola, quisiera solicitar una demo de NEXUS-TC.";
+  const waBase = (msg) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-texture" aria-hidden="true"></div>
-  <div class="hero-particles" aria-hidden="true" id="particles"></div>
-  <div class="container hero-inner">
-    <div class="hero-copy">
-      <p class="eyebrow">Software contable · 100% SUNAT Perú</p>
-      <h1>El núcleo estratégico para la <em>gestión contable</em> de tu empresa.</h1>
-      <p class="hero-lead">NEXUS-TC centraliza comprobantes, SIRE, Buzón Electrónico y reportes tributarios de SUNAT en una sola aplicación de escritorio — con automatización real y un asistente de inteligencia artificial que conoce tus datos contables.</p>
-      <div class="hero-actions">
-        <a href="#contacto" class="btn btn-primary btn-lg">Solicitar demo</a>
-        <a href="#" class="btn btn-whatsapp btn-lg" id="hero-whatsapp">
-          <svg viewBox="0 0 24 24" class="icon-wa" aria-hidden="true"><path d="M17.6 6.3A8.9 8.9 0 0 0 12.04 3.5 8.95 8.95 0 0 0 3.1 12.4c0 1.6.4 3 1.2 4.3L3.5 21l4.4-1.2a8.9 8.9 0 0 0 4.1 1 9 9 0 0 0 5.6-15.5Zm-5.56 13.8a7.4 7.4 0 0 1-3.8-1l-.27-.16-2.5.7.66-2.4-.18-.28a7.5 7.5 0 0 1-1.1-3.9A7.4 7.4 0 0 1 12 5a7.4 7.4 0 0 1 7.4 7.4 7.4 7.4 0 0 1-7.36 7.4Z"/></svg>
-          Hablar por WhatsApp
-        </a>
-      </div>
-      <ul class="hero-trust">
-        <li>Datos 100% locales</li>
-        <li>Multiempresa real</li>
-        <li>Licencia firmada Ed25519</li>
-      </ul>
-    </div>
-    <div class="hero-visual">
-      <div class="voucher-card">
-        <div class="voucher-head">
-          <span class="voucher-co">NEXUS-TC</span>
-          <span class="voucher-status" id="voucher-status">validando…</span>
-        </div>
-        <div class="voucher-row"><span>Tipo</span><strong>Factura electrónica</strong></div>
-        <div class="voucher-row"><span>Serie</span><strong>F001-008342</strong></div>
-        <div class="voucher-row"><span>RUC emisor</span><strong>20601●●●●12</strong></div>
-        <div class="voucher-row"><span>IGV</span><strong>S/ 142.80</strong></div>
-        <div class="voucher-row"><span>Total</span><strong>S/ 938.80</strong></div>
-        <div class="voucher-seal" id="voucher-seal" aria-hidden="true">
-          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46"/><path d="M30 52 L44 66 L72 36"/></svg>
-        </div>
-      </div>
-      <div class="dash-chip dash-chip-1">RVIE generado</div>
-      <div class="dash-chip dash-chip-2">Buzón SUNAT · 2 nuevos</div>
-    </div>
-  </div>
-</section>
+  ["hero-whatsapp","contacto-whatsapp","social-whatsapp","wa-float"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el){ el.href = waBase(WA_MSG_DEFAULT); el.target="_blank"; el.rel="noopener noreferrer"; }
+  });
 
-<!-- EL PROBLEMA -->
-<section class="problema" id="problema">
-  <div class="container">
-    <p class="eyebrow eyebrow-light">El problema</p>
-    <h2>SUNAT exige presencia constante. <br>Tu tiempo no debería pagarlo.</h2>
-    <div class="problema-grid">
-      <div class="problema-item"><span class="problema-num">01</span><h3>Validación manual</h3><p>Revisar comprobante por comprobante en el portal web de SUNAT consume horas que podrían dedicarse a asesorar clientes.</p></div>
-      <div class="problema-item"><span class="problema-num">02</span><h3>SIRE fragmentado</h3><p>Generar el Registro de Ventas (RVIE) y Compras (RCE) a través de tickets asíncronos requiere seguimiento constante.</p></div>
-      <div class="problema-item"><span class="problema-num">03</span><h3>Buzón disperso</h3><p>Las notificaciones de SUNAT quedan aisladas del resto de tu información contable, fáciles de pasar por alto.</p></div>
-      <div class="problema-item"><span class="problema-num">04</span><h3>Multiempresa sin orden</h3><p>Gestionar credenciales y reportes de varias empresas en pestañas sueltas del navegador no escala.</p></div>
-    </div>
-  </div>
-</section>
+  /* Menú móvil */
+  const toggle = document.getElementById("nav-toggle");
+  const header = document.querySelector(".site-header");
+  const nav = document.getElementById("main-nav");
+  if (toggle && header && nav){
+    toggle.addEventListener("click", () => {
+      const open = header.classList.toggle("is-open");
+      toggle.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+    nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+      header.classList.remove("is-open");
+      toggle.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded","false");
+    }));
+  }
 
-<!-- FUNCIONALIDADES -->
-<section class="funcionalidades" id="funcionalidades">
-  <div class="container">
-    <p class="eyebrow">Funcionalidades</p>
-    <h2>Todo lo que tu estudio contable necesita, en un solo núcleo.</h2>
-    <div class="features-grid">
-      <article class="feature-card feature-card-wide" id="asistente-ia">
-        <div class="feature-card-wide-content">
-          <div class="feature-icon" aria-hidden="true">🤖</div>
-          <h3>Asistente Contable con IA</h3>
-          <p>Pregúntale directamente a tus datos: <em>"¿Cuánto IGV acumulé este mes?"</em>, <em>"¿Qué boletas tienen ICBPER?"</em>. Compatible con Groq, OpenAI, Anthropic y Gemini.</p>
-        </div>
-        <div class="chat-preview" aria-hidden="true">
-          <div class="chat-bubble chat-user">¿Cuánto IGV acumulé este mes?</div>
-          <div class="chat-bubble chat-ai">Acumulaste <strong>S/ 4,218.60</strong> en IGV durante junio, sobre 86 comprobantes emitidos.</div>
-        </div>
-      </article>
-      <article class="feature-card"><div class="feature-icon">🏢</div><h3>Gestión multiempresa</h3><p>Administra desde 2 hasta 200 empresas en un solo sistema, con credenciales SUNAT cifradas de forma independiente.</p></article>
-      <article class="feature-card"><div class="feature-icon">📄</div><h3>Comprobantes: ventas y compras</h3><p>Vistas separadas para emitidos y recibidos, con filtros por tipo de comprobante, fecha y estado.</p></article>
-      <article class="feature-card"><div class="feature-icon">🔐</div><h3>Conexión segura con SUNAT</h3><p>Integración oficial con la API de Consulta de Validez y la API SIRE (RVIE / RCE) vía tickets asíncronos.</p></article>
-      <article class="feature-card"><div class="feature-icon">📥</div><h3>Buzón Electrónico integrado</h3><p>Sincroniza y consulta los mensajes de tu buzón SUNAT sin salir de la aplicación.</p></article>
-      <article class="feature-card"><div class="feature-icon">📊</div><h3>Dashboard y reportes</h3><p>Ventas, IGV, ICBPER, percepciones y detracciones por mes, con gráficos interactivos.</p></article>
-      <article class="feature-card"><div class="feature-icon">📋</div><h3>Generación SIRE automática</h3><p>Archivos de Registro de Ventas y Compras listos para presentar a SUNAT, sin armarlos a mano.</p></article>
-      <article class="feature-card"><div class="feature-icon">👥</div><h3>Multiusuario con roles</h3><p>Roles de Gerente y Usuario, con asignación específica de empresas por persona del equipo.</p></article>
-    </div>
-  </div>
-</section>
+  /* Animación voucher */
+  const vStatus = document.getElementById("voucher-status");
+  const vSeal   = document.getElementById("voucher-seal");
+  if (vStatus && vSeal){
+    const reduced = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+    setTimeout(() => {
+      vStatus.textContent = "comprobante válido";
+      vStatus.classList.add("is-valid");
+      vSeal.classList.add("is-shown");
+    }, reduced ? 0 : 1400);
+  }
 
-<!-- DIFERENCIADORES -->
-<section class="diferenciadores">
-  <div class="container">
-    <p class="eyebrow eyebrow-light">Por qué NEXUS-TC</p>
-    <h2>No es un ERP genérico con SUNAT encima.</h2>
-    <div class="dif-list">
-      <div class="dif-item"><h3>Construido sobre SUNAT, no adaptado</h3><p>Cada función nace directamente de las APIs oficiales peruanas, no de un sistema internacional con parches locales.</p></div>
-      <div class="dif-item"><h3>IA contable real, no un chatbot decorativo</h3><p>El asistente conoce los datos de la empresa activa y responde con cifras reales.</p></div>
-      <div class="dif-item"><h3>Tus datos viven en tu PC</h3><p>La información contable se queda en el equipo del usuario, no en la nube de un tercero.</p></div>
-      <div class="dif-item"><h3>Pensado para quien lleva varias empresas</h3><p>Multiempresa real desde el diseño, no una función agregada después.</p></div>
-      <div class="dif-item"><h3>Precio de desarrollador independiente peruano</h3><p>Planes más flexibles que el software corporativo internacional.</p></div>
-    </div>
-  </div>
-</section>
+  /* Partículas en el hero */
+  const particleContainer = document.getElementById("particles");
+  if (particleContainer){
+    for (let i = 0; i < 30; i++){
+      const p = document.createElement("div");
+      p.className = "particle";
+      p.style.cssText = `
+        left:${Math.random()*100}%;
+        width:${1+Math.random()*2}px;
+        height:${1+Math.random()*2}px;
+        animation-duration:${4+Math.random()*8}s;
+        animation-delay:${Math.random()*6}s;
+        bottom:0;
+      `;
+      particleContainer.appendChild(p);
+    }
+  }
 
-<!-- PLANES -->
-<section class="planes" id="planes">
-  <div class="container">
-    <p class="eyebrow">Planes</p>
-    <h2>Un plan para cada tamaño de estudio contable.</h2>
-    <p class="planes-sub">Licencias offline firmadas digitalmente (Ed25519) — sin depender de conexión constante a un servidor.</p>
-    <div class="planes-grid">
-      <div class="plan-card"><h3>Básico</h3><p class="plan-range">2 – 5 empresas</p><p class="plan-desc">Para el contador independiente que recién centraliza su gestión SUNAT.</p><a href="#contacto" class="btn btn-outline">Solicitar demo</a></div>
-      <div class="plan-card plan-card-featured"><span class="plan-tag">Más elegido</span><h3>Profesional</h3><p class="plan-range">5 – 20 empresas</p><p class="plan-desc">Para estudios contables en crecimiento que necesitan orden multiempresa.</p><a href="#contacto" class="btn btn-primary">Solicitar demo</a></div>
-      <div class="plan-card"><h3>Estudio</h3><p class="plan-range">20 – 50 empresas</p><p class="plan-desc">Para estudios consolidados con equipos y roles definidos.</p><a href="#contacto" class="btn btn-outline">Solicitar demo</a></div>
-      <div class="plan-card"><h3>Enterprise</h3><p class="plan-range">50 – 200 empresas</p><p class="plan-desc">Para operaciones contables a gran escala, con soporte dedicado.</p><a href="#contacto" class="btn btn-outline">Solicitar demo</a></div>
-    </div>
-  </div>
-</section>
+  /* =========================================================
+     FORMULARIO → ENVIAR POR WHATSAPP
+     ========================================================= */
+  const form = document.getElementById("contact-form");
+  const status = document.getElementById("form-status");
 
-<!-- SEGURIDAD -->
-<section class="seguridad" id="seguridad">
-  <div class="container seguridad-inner">
-    <div class="seguridad-copy">
-      <p class="eyebrow eyebrow-light">Seguridad</p>
-      <h2>Tus credenciales SUNAT, cifradas. Tus datos, en tu PC.</h2>
-      <ul class="seguridad-list">
-        <li><strong>Cifrado Fernet</strong> para usuario SOL y claves API, almacenadas localmente.</li>
-        <li><strong>Licencias Ed25519</strong> con firma digital, validables sin conexión constante.</li>
-        <li><strong>Base de datos local (SQLite)</strong> — la información nunca sale de tu equipo.</li>
-        <li><strong>Roles de acceso</strong> para limitar qué empresas ve cada usuario.</li>
-      </ul>
-    </div>
-    <div class="seguridad-visual" aria-hidden="true">
-      <div class="lock-card">
-        <svg viewBox="0 0 64 64" class="lock-icon"><rect x="16" y="28" width="32" height="26" rx="3"/><path d="M22 28v-6a10 10 0 0 1 20 0v6" fill="none" stroke-width="4"/><circle cx="32" cy="40" r="3.5"/></svg>
-        <span class="lock-label">AES · Fernet · Ed25519</span>
-      </div>
-    </div>
-  </div>
-</section>
+  if (form && status){
+    form.addEventListener("submit", e => {
+      e.preventDefault();
 
-<!-- CREADOR -->
-<section class="creador" id="creador">
-  <div class="container creador-inner">
-    <div class="creador-avatar">PT</div>
-    <div class="creador-copy">
-      <p class="eyebrow">Sobre el creador</p>
-      <h2>Perci Olid Terán Cabanillas</h2>
-      <p>Desarrollador e ingeniero de sistemas peruano, basado en Cajamarca, que combina contabilidad pública y desarrollo de software para construir herramientas que entienden de verdad la realidad tributaria peruana. NEXUS-TC nace de esa unión: tecnología seria para un problema serio.</p>
-    </div>
-  </div>
-</section>
+      const nombre   = form.nombre.value.trim();
+      const empresa  = form.empresa.value.trim();
+      const correo   = form.correo.value.trim();
+      const telefono = form.telefono.value.trim();
+      const plan     = form["empresas-gestionadas"].value;
+      const mensaje  = form.mensaje.value.trim();
 
-<!-- CONTACTO -->
-<section class="contacto" id="contacto">
-  <div class="container contacto-inner">
-    <div class="contacto-info">
-      <p class="eyebrow eyebrow-light">Contacto</p>
-      <h2>Solicita una demo de NEXUS-TC</h2>
-      <p class="contacto-lead">Cuéntanos sobre tu estudio contable o empresa y te mostramos cómo NEXUS-TC se adapta a tu operación.</p>
-      <a href="#" class="btn btn-whatsapp btn-lg" id="contacto-whatsapp">
-        <svg viewBox="0 0 24 24" class="icon-wa" aria-hidden="true"><path d="M17.6 6.3A8.9 8.9 0 0 0 12.04 3.5 8.95 8.95 0 0 0 3.1 12.4c0 1.6.4 3 1.2 4.3L3.5 21l4.4-1.2a8.9 8.9 0 0 0 4.1 1 9 9 0 0 0 5.6-15.5Zm-5.56 13.8a7.4 7.4 0 0 1-3.8-1l-.27-.16-2.5.7.66-2.4-.18-.28a7.5 7.5 0 0 1-1.1-3.9A7.4 7.4 0 0 1 12 5a7.4 7.4 0 0 1 7.4 7.4 7.4 7.4 0 0 1-7.36 7.4Z"/></svg>
-        Escribir por WhatsApp
-      </a>
-      <dl class="contacto-meta">
-        <div><dt>Ubicación</dt><dd>Cajamarca, Perú</dd></div>
-        <div><dt>WhatsApp</dt><dd>+51 900 448 916</dd></div>
-        <div><dt>Correo</dt><dd>contacto@nexus-tc.pe</dd></div>
-      </dl>
-    </div>
+      /* Validación */
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
+      if (!nombre){
+        status.style.color="#D32F2F"; status.textContent="Por favor ingresa tu nombre completo.";
+        form.nombre.focus(); return;
+      }
+      if (!correo || !emailOk){
+        status.style.color="#D32F2F"; status.textContent="Ingresa un correo electrónico válido.";
+        form.correo.focus(); return;
+      }
 
-    <div class="form-wrapper">
-      <div class="form-glow" aria-hidden="true"></div>
-      <form class="contacto-form" id="contact-form" novalidate>
-        <div class="form-header">
-          <div class="form-header-dot"></div>
-          <div class="form-header-dot"></div>
-          <div class="form-header-dot"></div>
-          <span>Nueva solicitud de demo</span>
-        </div>
-        <div class="form-body">
-          <div class="form-row-2">
-            <div class="form-field">
-              <label for="nombre">Nombre completo</label>
-              <div class="input-wrap"><span class="input-icon">👤</span><input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo" autocomplete="name"></div>
-            </div>
-            <div class="form-field">
-              <label for="empresa">Empresa / estudio</label>
-              <div class="input-wrap"><span class="input-icon">🏢</span><input type="text" id="empresa" name="empresa" placeholder="Opcional" autocomplete="organization"></div>
-            </div>
-          </div>
-          <div class="form-row-2">
-            <div class="form-field">
-              <label for="correo">Correo electrónico</label>
-              <div class="input-wrap"><span class="input-icon">✉️</span><input type="email" id="correo" name="correo" required placeholder="tu@correo.com" autocomplete="email"></div>
-            </div>
-            <div class="form-field">
-              <label for="telefono">Teléfono / WhatsApp</label>
-              <div class="input-wrap"><span class="input-icon">📱</span><input type="tel" id="telefono" name="telefono" placeholder="+51 9XX XXX XXX" autocomplete="tel"></div>
-            </div>
-          </div>
-          <div class="form-field">
-            <label for="empresas-gestionadas">¿Cuántas empresas gestionas?</label>
-            <div class="input-wrap select-wrap"><span class="input-icon">📊</span>
-              <select id="empresas-gestionadas" name="empresas-gestionadas">
-                <option value="2-5">2 – 5 empresas (Plan Básico)</option>
-                <option value="5-20">5 – 20 empresas (Plan Profesional)</option>
-                <option value="20-50">20 – 50 empresas (Plan Estudio)</option>
-                <option value="50-200">50 – 200 empresas (Plan Enterprise)</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-field">
-            <label for="mensaje">Mensaje</label>
-            <div class="input-wrap textarea-wrap"><span class="input-icon">💬</span><textarea id="mensaje" name="mensaje" rows="3" placeholder="Cuéntanos qué necesitas resolver..."></textarea></div>
-          </div>
-          <button type="submit" class="btn-form-submit">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 6.3A8.9 8.9 0 0 0 12.04 3.5 8.95 8.95 0 0 0 3.1 12.4c0 1.6.4 3 1.2 4.3L3.5 21l4.4-1.2a8.9 8.9 0 0 0 4.1 1 9 9 0 0 0 5.6-15.5Z"/></svg>
-            Enviar por WhatsApp
-          </button>
-          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
+      /* Armar mensaje de WhatsApp */
+      const planLabels = {
+        "2-5":"Básico (2-5 empresas)",
+        "5-20":"Profesional (5-20 empresas)",
+        "20-50":"Estudio (20-50 empresas)",
+        "50-200":"Enterprise (50-200 empresas)"
+      };
+      const lines = [
+        "🚀 *Solicitud de demo — NEXUS-TC*",
+        "",
+        `👤 *Nombre:* ${nombre}`,
+        empresa ? `🏢 *Empresa:* ${empresa}` : null,
+        `✉️ *Correo:* ${correo}`,
+        telefono ? `📱 *Teléfono:* ${telefono}` : null,
+        `📊 *Plan de interés:* ${planLabels[plan] || plan}`,
+        mensaje ? `💬 *Mensaje:* ${mensaje}` : null,
+      ].filter(Boolean).join("\n");
 
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <img src="nexus-tc-logo.png" alt="NEXUS-TC" class="logo-img footer-logo-img">
-      <p>El núcleo estratégico para la gestión contable de tu empresa.</p>
-      <!-- 6 ÍCONOS SOCIALES ANIMADOS -->
-      <div class="social-row" aria-label="Redes sociales">
-        <a href="#" id="social-whatsapp" class="social-link social-wa" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24"><path d="M17.6 6.3A8.9 8.9 0 0 0 12.04 3.5 8.95 8.95 0 0 0 3.1 12.4c0 1.6.4 3 1.2 4.3L3.5 21l4.4-1.2a8.9 8.9 0 0 0 4.1 1 9 9 0 0 0 5.6-15.5Zm-5.56 13.8a7.4 7.4 0 0 1-3.8-1l-.27-.16-2.5.7.66-2.4-.18-.28a7.5 7.5 0 0 1-1.1-3.9A7.4 7.4 0 0 1 12 5a7.4 7.4 0 0 1 7.4 7.4 7.4 7.4 0 0 1-7.36 7.4Z"/></svg>
-        </a>
-        <a href="https://www.facebook.com/share/17sAjzDMkx/" class="social-link social-fb" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.16 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.51 1.49-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.91h-2.34V22c4.78-.78 8.44-4.94 8.44-9.94Z"/></svg>
-        </a>
-        <a href="https://www.tiktok.com/@iaxxx9139" class="social-link social-tt" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24"><path d="M16.6 5.82a4.27 4.27 0 0 1-2.6-3.4h-3.1v13.4a2.6 2.6 0 1 1-1.84-2.49V10.1a5.86 5.86 0 0 0-.76-.05A5.78 5.78 0 1 0 14 15.83V9.4a7.3 7.3 0 0 0 4.3 1.39V7.6a4.27 4.27 0 0 1-1.7-1.78Z"/></svg>
-        </a>
-        <a href="https://t.me/nexustc" class="social-link social-tg" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8-1.7 8.02c-.12.56-.46.7-.93.43l-2.56-1.88-1.24 1.19c-.14.14-.25.25-.5.25l.18-2.6 4.7-4.24c.2-.18-.04-.28-.32-.1L7.82 14.6l-2.52-.79c-.55-.17-.56-.55.12-.81l9.85-3.8c.46-.17.86.11.37.6z"/></svg>
-        </a>
-        <a href="https://www.instagram.com/nexustc" class="social-link social-ig" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        </a>
-        <a href="https://www.youtube.com/@nexustc" class="social-link social-yt" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </a>
-      </div>
-    </div>
-    <nav class="footer-nav" aria-label="Links del pie de página">
-      <div>
-        <h4>Producto</h4>
-        <a href="#funcionalidades">Funcionalidades</a>
-        <a href="#asistente-ia">Asistente IA</a>
-        <a href="#planes">Planes</a>
-        <a href="#seguridad">Seguridad</a>
-      </div>
-      <div>
-        <h4>Empresa</h4>
-        <a href="#creador">Sobre el creador</a>
-        <a href="#contacto">Contacto</a>
-      </div>
-      <div>
-        <h4>Stack técnico</h4>
-        <p class="footer-stack">React · FastAPI · SQLite local<br>Electron · Fernet · Ed25519</p>
-      </div>
-    </nav>
-  </div>
-  <div class="container footer-bottom">
-    <p>© <span id="year"></span> NEXUS-TC — Perci Olid Terán Cabanillas. Todos los derechos reservados.</p>
-  </div>
-</footer>
+      /* Abrir WhatsApp */
+      window.open(waBase(lines), "_blank", "noopener,noreferrer");
 
-<script src="script.js"></script>
-</body>
-</html>
+      /* Confirmación visual */
+      status.style.color="#2E8B57";
+      status.textContent = `✓ ¡Listo, ${nombre.split(" ")[0]}! Se abrió WhatsApp con tu información. Envía el mensaje y te contactamos pronto.`;
+      form.reset();
+    });
+  }
+
+});
