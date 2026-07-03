@@ -119,3 +119,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
+
+/* =========================================================
+   AUTOPLAY CON AUDIO — YouTube API
+   El truco: empieza muted (para que el navegador lo permita),
+   luego la API lo desmutea automáticamente al estar listo.
+   ========================================================= */
+(function(){
+  // Cargar la API de YouTube
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(tag);
+
+  var player;
+  window.onYouTubeIframeAPIReady = function(){
+    player = new YT.Player('yt-hero', {
+      events: {
+        onReady: function(e){
+          // Primero mute para burlar la política del navegador
+          e.target.mute();
+          e.target.playVideo();
+          // Tras 300ms desmutea — en ese punto ya está reproduciéndose
+          setTimeout(function(){
+            e.target.unMute();
+            e.target.setVolume(80);
+          }, 300);
+        }
+      }
+    });
+  };
+})();
