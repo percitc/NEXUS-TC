@@ -123,30 +123,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* =========================================================
    AUTOPLAY CON AUDIO — YouTube API
-   El truco: empieza muted (para que el navegador lo permita),
-   luego la API lo desmutea automáticamente al estar listo.
+   Técnica: muted autoplay → luego unMute vía API + 
+   desbloqueo por primer scroll/click del usuario
    ========================================================= */
 (function(){
-  // Cargar la API de YouTube
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
   document.head.appendChild(tag);
 
   var player;
+  var unmuted = false;
+
+  function tryUnmute() {
+    if (player && !unmuted) {
+      try {
+        player.unMute();
+        player.setVolume(85);
+        unmuted = true;
+      } catch(e) {}
+    }
+  }
+
   window.onYouTubeIframeAPIReady = function(){
     player = new YT.Player('yt-hero', {
       events: {
         onReady: function(e){
-          // Primero mute para burlar la política del navegador
           e.target.mute();
           e.target.playVideo();
-          // Tras 300ms desmutea — en ese punto ya está reproduciéndose
-          setTimeout(function(){
-            e.target.unMute();
-            e.target.setVolume(80);
-          }, 300);
+          // Intento 1: desmutear a los 500ms
+          setTimeout(tryUnmute, 500);
+        },
+        onStateChange: function(e){
+          // Intento 2: desmutear cuando empieza a reproducir
+          if (e.data === YT.PlayerState.PLAYING) {
+            setTimeout(tryUnmute, 200);
+          }
         }
       }
     });
   };
+
+  // Intento 3: al primer scroll o click del usuario, desmutear
+  ['scroll','click','touchstart','keydown'].forEach(function(ev){
+    window.addEventListener(ev, function handler(){
+      tryUnmute();
+      window.removeEventListener(ev, handler);
+    }, { once: true });
+  });
 })();
